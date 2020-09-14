@@ -679,10 +679,12 @@ impl CandidateBackingJob {
 		let commitments = CandidateCommitments {
 			fees: outputs.fees,
 			upward_messages: outputs.upward_messages,
+			horizontal_messages: outputs.horizontal_messages,
 			erasure_root,
 			new_validation_code: outputs.new_validation_code,
 			head_data: outputs.head_data,
 			processed_downward_messages: outputs.processed_downward_messages,
+			hrmp_watermark: outputs.hrmp_watermark,
 		};
 
 		let res = match with_commitments(commitments) {
@@ -1159,10 +1161,12 @@ mod tests {
 					tx.send(Ok(
 						ValidationResult::Valid(ValidationOutputs {
 							head_data: expected_head_data.clone(),
+							horizontal_messages: Vec::new(),
 							upward_messages: Vec::new(),
 							fees: Default::default(),
 							new_validation_code: None,
 							processed_downward_messages: 0,
+							hrmp_watermark: 0,
 						}, test_state.validation_data.persisted),
 					)).unwrap();
 				}
@@ -1280,9 +1284,11 @@ mod tests {
 						ValidationResult::Valid(ValidationOutputs {
 							head_data: expected_head_data.clone(),
 							upward_messages: Vec::new(),
+							horizontal_messages: Vec::new(),
 							fees: Default::default(),
 							new_validation_code: None,
 							processed_downward_messages: 0,
+							hrmp_watermark: 0,
 						}, test_state.validation_data.persisted),
 					)).unwrap();
 				}
@@ -1419,9 +1425,11 @@ mod tests {
 						ValidationResult::Valid(ValidationOutputs {
 							head_data: expected_head_data.clone(),
 							upward_messages: Vec::new(),
+							horizontal_messages: Vec::new(),
 							fees: Default::default(),
 							new_validation_code: None,
 							processed_downward_messages: 0,
+							hrmp_watermark: 0,
 						}, test_state.validation_data.persisted),
 					)).unwrap();
 				}
@@ -1575,9 +1583,11 @@ mod tests {
 						ValidationResult::Valid(ValidationOutputs {
 							head_data: expected_head_data.clone(),
 							upward_messages: Vec::new(),
+							horizontal_messages: Vec::new(),
 							fees: Default::default(),
 							new_validation_code: None,
 							processed_downward_messages: 0,
+							hrmp_watermark: 0,
 						}, test_state.validation_data.persisted),
 					)).unwrap();
 				}
